@@ -19,7 +19,9 @@
 </div>
 
 <app-modal #monsterModal [title]="'Add a Monster'">
+  <app-monster-form (monsterCreated)="addEntity($event)"></app-monster-form>
 </app-modal>
 
 <app-modal #playerModal [title]="'Add a Player'">
+
 </app-modal>

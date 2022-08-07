@@ -1,0 +1,86 @@
+<form [formGroup]="monsterForm" (ngSubmit)="addMonster()" class="w-2/3 mx-auto flex flex-col items-start">
+  <div class="w-full flex flex-row justify-between items-center">
+    <label for="initiative" class="w-5/12">
+      <p class="block text-sm font-medium text-slate-700" [ngClass]="{'text-slate-500': autoInitiative}">Initiative</p>
+      <input id="initiative" type="number" formControlName="initiative" required min="0"
+             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('initiative')}"
+      >
+    </label>
+
+    <div class="w-5/12 flex flex-col items-start">
+      <label for="autoInitiative" class="flex items-center">
+        <input id="autoInitiative" type="checkbox" [ngModel]="autoInitiative" [ngModelOptions]="{standalone: true}" (change)="switchInitiativeInput()">
+        <p class="block text-sm font-medium text-slate-700 ml-3">Auto initiative</p>
+      </label>
+
+      <label for="dexMod" class="flex">
+        <input id="dexMod" type="number" [(ngModel)]="dexMod" [ngModelOptions]="{standalone: true}"
+               class="w-20 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+               [disabled]="!autoInitiative"
+        >
+        <p class="block text-sm font-medium text-slate-700 ml-3" [ngClass]="{'text-slate-500': !autoInitiative}">Monster's DEX modifier</p>
+      </label>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-row justify-between items-center mt-3">
+    <label for="name" class="w-5/12">
+      <p class="block text-sm font-medium text-slate-700">Name</p>
+      <input id="name" type="text" formControlName="name" required
+             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('name')}"
+      >
+    </label>
+
+    <label for="race" class="w-5/12">
+      <p class="block text-sm font-medium text-slate-700">Race</p>
+      <input id="race" type="text" formControlName="race" required
+             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('race')}"
+      >
+    </label>
+  </div>
+
+  <div class="w-full flex flex-row justify-between items-center mt-3">
+    <label for="maxHp" class="w-5/12">
+      <p class="block text-sm font-medium text-slate-700">Maximum HP</p>
+      <input id="maxHp" type="number" formControlName="maxHp" required min="0"
+             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('maxHp')}"
+      >
+    </label>
+
+    <label for="xp" class="w-5/12">
+      <p class="block text-sm font-medium text-slate-700">XP</p>
+      <input id="xp" type="number" formControlName="xp" required min="0"
+             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('xp')}"
+      >
+    </label>
+  </div>
+
+  <div class="w-full mt-3">
+    <label for="sheetURL">
+      <p class="block text-sm font-medium text-slate-700">Refsheet URL</p>
+      <input id="sheetURL" type="text" formControlName="sheetURL" required
+             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('sheetURL')}"
+      >
+    </label>
+  </div>
+
+  <div class="w-full mt-3">
+    <label for="note">
+      <p class="block text-sm font-medium text-slate-700">Additional information</p>
+      <textarea id="note" type="text" formControlName="note"
+                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
+      </textarea>
+    </label>
+  </div>
+
+  <div class="my-5 ml-auto flex">
+    <button type="button" class="py-1 px-5 border rounded bg-neutral-600 text-white shadow mr-3" (click)="monsterForm.reset()">Reset</button>
+    <button type="submit" [disabled]="!monsterForm.valid" class="py-1 px-5 border rounded bg-blue-500 text-white shadow disabled:bg-blue-200 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed">Submit</button>
+  </div>
+</form>
