@@ -6,6 +6,5 @@ export interface Monster extends Entity {
   xp: number,
   race: string,
   sheetURL: string,
-  attacking: string,
-  extra: string
+  note: string
 }

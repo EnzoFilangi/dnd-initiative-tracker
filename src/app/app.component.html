@@ -1,14 +1,16 @@
 <div class="h-screen bg-gradient-to-tr from-violet-500 to-purple-500 p-10">
-  <div class="w-full h-full flex flex-col w-4/5 mx-auto">
-    <h1 class="text-white font-bold text-6xl mx-auto">DnD Initiative Tracker</h1>
-    <div class="flex flex-col mt-5">
-      <div class="flex flex-row w-full justify-center">
-        <button class="w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100 mr-10">Add a Monster</button>
-        <button class="w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100">Add a Player</button>
-      </div>
-      <div class="flex flex-col mt-5">
-        <app-entity-box *ngFor="let entity of entities; let i = index;" [entity]="entity" [index]="i"></app-entity-box>
-      </div>
+  <div class="w-full h-full flex flex-col lg:w-3/5 md:w-4/5 w-full mx-auto flex flex-col">
+    <!-- Heading -->
+    <h1 class="text-white font-bold text-6xl mx-auto mb-5">DnD Initiative Tracker</h1>
+    <div class="flex flex-row w-full justify-center">
+      <button class="sm:w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100 mr-10">Add a Monster</button>
+      <button class="sm:w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100">Add a Player</button>
+    </div>
+    <hr class="mt-5 border-2 rounded-full">
+
+    <!-- Entity list -->
+    <div class="flex flex-col mt-10">
+      <app-entity-box *ngFor="let entity of entities; let i = index;" [entity]="entity" [index]="i"></app-entity-box>
     </div>
   </div>
 </div>

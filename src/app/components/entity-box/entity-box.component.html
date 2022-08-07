@@ -1,6 +1,14 @@
-<div *ngIf="entity">
-  <app-monster-box *ngIf="entity.type===EntityTypes.monster; else player" [monster]="asMonster(entity)"></app-monster-box>
+<div *ngIf="entity" class="w-full min-h-[5rem] p-2 mb-4 rounded bg-white shadow-md flex flex-row justify-between items-center hover:scale-[101%] duration-100">
+  <!-- Dispatch the displaying to the right kind of box depending on the 'type' property -->
+  <app-monster-box class="flex-grow" *ngIf="entity.type===EntityTypes.monster; else player" [monster]="asMonster(entity)"></app-monster-box>
   <ng-template #player>
     <app-player-box [player]="asPlayer(entity)"></app-player-box>
   </ng-template>
+
+  <!-- Display common elements -->
+  <div class="flex flex-row justify-between items-center">
+    <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200">
+      <fa-icon [icon]="trash" class="mx-auto"></fa-icon>
+    </button>
+  </div>
 </div>

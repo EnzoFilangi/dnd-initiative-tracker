@@ -1,3 +1,47 @@
 <div *ngIf="monster">
+  <!-- If the monster is alive, display all the details. Else, only display its name -->
+  <div *ngIf="monster.hp > 0; else deadMonster" class="flex flex-row justify-between items-center">
+    <!-- Information side -->
+    <div class="flex flex-col items-start grow mr-10">
+      <!-- Display the initiative of the monster, its name, race, and a button to its refsheet -->
+      <div class="text-xl font-bold mb-2 flex flex-row items-center">
+        <h1 class="border rounded shadow p-1 m-1">{{monster.initiative}}</h1>
+        <h1>{{monster.name}} ({{monster.race}})</h1>
+        <fa-icon [icon]="badge" (click)="openSheet()" class="mx-2 cursor-pointer"></fa-icon>
+      </div>
 
+      <!-- Display the dynamic information : health, note, etc -->
+      <div class="flex flex-row flex-nowrap sm:w-1/2 w-full justify-between mb-3">
+        <div>
+          <p>HP : {{monster.hp}} / {{monster.maxHp}}</p>
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-red-700 h-2.5 rounded-full" [ngStyle]="{'width': getHealthPercentage()}"></div>
+          </div>
+        </div>
+        <p>XP : {{monster.xp}}</p>
+      </div>
+
+      <textarea *ngIf="monster.note" [(ngModel)]="monster.note" class="w-full rounded border shadow-inner p-1 resize-none"></textarea>
+    </div>
+
+    <!-- Action side -->
+    <div class="flex flex-col items-center mr-3">
+      <!-- Allow the user to easily update the HP counter of the monster -->
+      <p>Attack</p>
+      <input type="text" class="border rounded p-1 mb-1" size="5">
+      <div class="flex flex-row justify-between items-center w-full">
+        <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200">
+          <fa-icon [icon]="plus" class="mx-auto"></fa-icon>
+        </button>
+        <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200">
+          <fa-icon [icon]="minus" class="mx-auto"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case where the monster is dead -->
+  <ng-template #deadMonster>
+    <h1 class="text-xl font-bold line-through">{{monster.name}} ({{monster.race}})</h1>
+  </ng-template>
 </div>
