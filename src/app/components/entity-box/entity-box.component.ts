@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Entity} from "../../interfaces/entity";
 import {Monster} from "../../interfaces/monster";
 import {Player} from "../../interfaces/player";
@@ -14,6 +14,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class EntityBoxComponent {
   @Input() entity: Entity | undefined;
   @Input() index: number = -1;
+  @Input() selected: boolean = false;
+
+  @Output() skipMe = new EventEmitter<boolean>();
 
   trash = faTrash;
 
@@ -29,4 +32,12 @@ export class EntityBoxComponent {
    * @param val
    */
   asPlayer(val: Entity) : Player { return (val as Player); }
+
+  /**
+   * Propagates the event up the call stack
+   * @param $event
+   */
+  skipThis($event: boolean): void {
+    this.skipMe.emit($event)
+  }
 }

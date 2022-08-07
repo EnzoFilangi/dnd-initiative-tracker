@@ -1,8 +1,8 @@
 <div *ngIf="entity" class="w-full min-h-[5rem] p-2 mb-4 rounded bg-white shadow-md flex flex-row justify-between items-center hover:scale-[101%] duration-100">
   <!-- Dispatch the displaying to the right kind of box depending on the 'type' property -->
-  <app-monster-box class="flex-grow" *ngIf="entity.type===EntityTypes.monster; else player" [monster]="asMonster(entity)"></app-monster-box>
+  <app-monster-box class="flex-grow" *ngIf="entity.type===EntityTypes.monster; else player" [monster]="asMonster(entity)" [selected]="selected" (skipMe)="skipThis($event)"></app-monster-box>
   <ng-template #player>
-    <app-player-box [player]="asPlayer(entity)"></app-player-box>
+    <app-player-box [player]="asPlayer(entity)" [selected]="selected" (skipMe)="skipThis($event)"></app-player-box>
   </ng-template>
 
   <!-- Display common elements -->

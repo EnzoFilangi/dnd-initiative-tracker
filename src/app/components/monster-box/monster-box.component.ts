@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Monster} from "../../interfaces/monster";
 
 import {faHandBackFist, faBriefcaseMedical, faIdBadge, faSkull, faStaffSnake} from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +8,11 @@ import {faHandBackFist, faBriefcaseMedical, faIdBadge, faSkull, faStaffSnake} fr
   templateUrl: './monster-box.component.html',
   styleUrls: ['./monster-box.component.css']
 })
-export class MonsterBoxComponent {
+export class MonsterBoxComponent implements OnChanges {
   @Input() monster: Monster | undefined;
+  @Input() selected: boolean = false;
+
+  @Output() skipMe = new EventEmitter<boolean>();
 
   hurt = faHandBackFist;
   heal = faBriefcaseMedical;
@@ -18,6 +21,20 @@ export class MonsterBoxComponent {
   resurrect = faStaffSnake;
 
   hpManipulationField: number = 0;
+
+  /**
+   * Tell the parent component to ignore this item if the monster is dead (since it doesn't have a turn)
+   * @param changes
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selected'].currentValue) {
+      if (this.monster){
+        this.skipMe.emit(this.monster.hp <= 0)
+      } else {
+        this.skipMe.emit(true);
+      }
+    }
+  }
 
   /**
    * Opens the refsheet of the monster in a new tab
