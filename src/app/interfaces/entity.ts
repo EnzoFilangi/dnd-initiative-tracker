@@ -1,5 +1,7 @@
+import {EntityTypes} from "./enums";
+
 export interface Entity {
-  type: "Player"|"Monster",
+  type: EntityTypes,
   initiative: number,
   name: string
 }

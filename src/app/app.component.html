@@ -6,6 +6,9 @@
         <button class="w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100 mr-10">Add a Monster</button>
         <button class="w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100">Add a Player</button>
       </div>
+      <div class="flex flex-col mt-5">
+        <app-entity-box *ngFor="let entity of entities; let i = index;" [entity]="entity" [index]="i"></app-entity-box>
+      </div>
     </div>
   </div>
 </div>

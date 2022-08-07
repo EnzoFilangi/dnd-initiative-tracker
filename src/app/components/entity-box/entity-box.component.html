@@ -1,1 +1,6 @@
-<p>entity-box works!</p>
+<div *ngIf="entity">
+  <app-monster-box *ngIf="entity.type===EntityTypes.monster; else player" [monster]="asMonster(entity)"></app-monster-box>
+  <ng-template #player>
+    <app-player-box [player]="asPlayer(entity)"></app-player-box>
+  </ng-template>
+</div>
