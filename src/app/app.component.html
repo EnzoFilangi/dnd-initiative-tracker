@@ -3,13 +3,13 @@
     <!-- Heading -->
     <h1 class="text-white font-bold text-6xl mx-auto mb-5">DnD Initiative Tracker</h1>
     <div class="flex flex-row w-full justify-center">
-      <button class="sm:w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100 mr-10">Add a Monster</button>
-      <button class="sm:w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 duration-100">Add a Player</button>
+      <button class="sm:w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 active:scale-95 duration-100 mr-10">Add a Monster</button>
+      <button class="sm:w-1/6 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-110 active:scale-95 duration-100">Add a Player</button>
     </div>
     <hr class="mt-5 border-2 rounded-full">
 
     <!-- Next turn button -->
-    <button class="w-5/6 mx-auto mt-4 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-105 duration-100" (click)="incrementInitiativePointer()">Next turn</button>
+    <button class="w-5/6 mx-auto mt-4 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-105 active:scale-95 duration-100" (click)="incrementInitiativePointer()">Next turn</button>
 
     <!-- Entity list -->
     <div class="flex flex-col mt-10">
