@@ -17,6 +17,7 @@ export class EntityBoxComponent {
   @Input() selected: boolean = false;
 
   @Output() skipMe = new EventEmitter<boolean>();
+  @Output() deleteMe = new EventEmitter<number>();
 
   trash = faTrash;
 
@@ -39,5 +40,9 @@ export class EntityBoxComponent {
    */
   skipThis($event: boolean): void {
     this.skipMe.emit($event)
+  }
+
+  deleteThis() {
+    this.deleteMe.emit(this.index);
   }
 }

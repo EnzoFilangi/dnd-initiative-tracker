@@ -83,4 +83,13 @@ export class AppComponent {
       this.anEntityPlayed = true;
     }
   }
+
+  deleteEntity($event: number) {
+    if ($event >= 0){
+      this.entities.splice($event, 1);
+      if ($event <= this.initiativePointer){
+        this.initiativePointer--;
+      }
+    }
+  }
 }
