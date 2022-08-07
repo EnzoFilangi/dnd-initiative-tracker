@@ -85,6 +85,10 @@ export class AppComponent {
     }
   }
 
+  /**
+   * Deletes the entity at the given index from the list of entities
+   * @param $event
+   */
   deleteEntity($event: number) {
     if ($event >= 0){
       this.entities.splice($event, 1);
@@ -94,7 +98,35 @@ export class AppComponent {
     }
   }
 
+  modalRef: ModalComponent | null = null;
   showModal(modal: ModalComponent) {
     modal.showModal();
+    this.modalRef = modal;
+  }
+
+  hideModal(){
+    this.modalRef?.closeModal();
+    this.modalRef = null;
+  }
+
+  /**
+   * Adds the given entity to the list of entities
+   * @param $event
+   */
+  addEntity($event: Entity) {
+    this.entities.push($event);
+    // Save the entity whose turn it is before sorting so that adding entities doesn't skip a turn
+    const currentPlayingEntity = this.entities[this.initiativePointer];
+    this.sortEntityList();
+    this.initiativePointer = this.entities.indexOf(currentPlayingEntity);
+    // Hide the form modal after adding the entity
+    this.hideModal();
+  }
+
+  /**
+   * Sorts the list of entities by descending order of initiative
+   */
+  sortEntityList(): void {
+    this.entities.sort((a, b) => b.initiative - a.initiative);
   }
 }

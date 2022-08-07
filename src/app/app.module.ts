@@ -7,8 +7,10 @@ import { AppComponent } from './app.component';
 import { MonsterBoxComponent } from './components/monster-box/monster-box.component';
 import { PlayerBoxComponent } from './components/player-box/player-box.component';
 import { EntityBoxComponent } from './components/entity-box/entity-box.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ModalComponent } from './components/modal/modal.component';
+import { MonsterFormComponent } from './components/monster-form/monster-form.component';
+import { PlayerFormComponent } from './components/player-form/player-form.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,15 @@ import { ModalComponent } from './components/modal/modal.component';
     MonsterBoxComponent,
     PlayerBoxComponent,
     EntityBoxComponent,
-    ModalComponent
+    ModalComponent,
+    MonsterFormComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
