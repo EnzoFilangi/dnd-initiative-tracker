@@ -1,3 +1,9 @@
 <div *ngIf="player">
-
+  <div class="flex flex-col items-start grow mr-10">
+    <!-- Display the initiative of the player and their name -->
+    <div class="text-xl font-bold mb-2 flex flex-row items-center">
+      <h1 class="border rounded shadow p-1 m-1">{{player.initiative}}</h1>
+      <h1>{{player.name}}</h1>
+    </div>
+  </div>
 </div>
