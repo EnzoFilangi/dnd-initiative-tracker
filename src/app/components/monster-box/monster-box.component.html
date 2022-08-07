@@ -27,14 +27,13 @@
     <!-- Action side -->
     <div class="flex flex-col items-center mr-3">
       <!-- Allow the user to easily update the HP counter of the monster -->
-      <p>Attack</p>
-      <input type="text" class="border rounded p-1 mb-1" size="5">
+      <input type="number" class="border rounded p-1 mb-1 text-right w-16" min="0" [(ngModel)]="hpManipulationField">
       <div class="flex flex-row justify-between items-center w-full">
-        <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200">
-          <fa-icon [icon]="plus" class="mx-auto"></fa-icon>
+        <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200" (click)="removeHP()">
+          <fa-icon [icon]="hurt" class="mx-auto"></fa-icon>
         </button>
-        <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200">
-          <fa-icon [icon]="minus" class="mx-auto"></fa-icon>
+        <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200" (click)="addHP()">
+          <fa-icon [icon]="heal" class="mx-auto"></fa-icon>
         </button>
       </div>
     </div>
@@ -42,6 +41,18 @@
 
   <!-- Case where the monster is dead -->
   <ng-template #deadMonster>
-    <h1 class="text-xl font-bold line-through">{{monster.name}} ({{monster.race}})</h1>
+    <div class="flex flex-row justify-between items-center">
+      <div>
+        <div class="text-xl font-bold mb-2 flex flex-row items-center">
+          <fa-icon class="border rounded shadow p-1 m-1" [icon]="skull"></fa-icon>
+          <h1 class="text-xl font-bold line-through">{{monster.name}} ({{monster.race}})</h1>
+        </div>
+        <p>XP : {{monster.xp}}</p>
+      </div>
+
+      <button class="cursor-pointer aspect-square w-7 p-1 rounded shadow hover:bg-gray-300 duration-200 mr-3" (click)="setFullHp()">
+        <fa-icon [icon]="resurrect" class="mx-auto"></fa-icon>
+      </button>
+    </div>
   </ng-template>
 </div>
