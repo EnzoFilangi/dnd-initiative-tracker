@@ -3,6 +3,7 @@ import {Entity} from "./interfaces/entity";
 import {EntityTypes} from "./interfaces/enums";
 import {Monster} from "./interfaces/monster";
 import {Player} from "./interfaces/player";
+import {ModalComponent} from "./components/modal/modal.component";
 
 @Component({
   selector: 'app-root',
@@ -91,5 +92,9 @@ export class AppComponent {
         this.initiativePointer--;
       }
     }
+  }
+
+  showModal(modal: ModalComponent) {
+    modal.showModal();
   }
 }

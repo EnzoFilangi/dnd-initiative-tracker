@@ -1,0 +1,8 @@
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.outside-screen {
+  transform: translateY(-170%);
+}
