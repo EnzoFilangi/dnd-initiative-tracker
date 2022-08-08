@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ModalComponent } from './components/modal/modal.component';
 import { MonsterFormComponent } from './components/monster-form/monster-form.component';
 import { PlayerFormComponent } from './components/player-form/player-form.component';
+import { XpTotalComponent } from './components/xp-total/xp-total.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PlayerFormComponent } from './components/player-form/player-form.compon
     EntityBoxComponent,
     ModalComponent,
     MonsterFormComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    XpTotalComponent
   ],
   imports: [
     BrowserModule,

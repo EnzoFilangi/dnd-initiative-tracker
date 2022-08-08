@@ -9,12 +9,15 @@
     <hr class="mt-5 border-2 rounded-full">
 
     <!-- Next turn button -->
-    <button class="w-5/6 mx-auto mt-4 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-105 active:scale-95 duration-100" (click)="incrementInitiativePointer()">Next turn</button>
+    <button *ngIf="entities.length > 1" class="w-5/6 mx-auto mt-4 text-xl bg-white text-zinc-800 rounded p-1 drop-shadow-lg hover:scale-105 active:scale-95 duration-100" (click)="incrementInitiativePointer()">Next turn</button>
 
     <!-- Entity list -->
     <div class="flex flex-col mt-10">
       <app-entity-box *ngFor="let entity of entities; let i = index;" [entity]="entity" [index]="i" [selected]="i === initiativePointer" (skipMe)="handleSelectionResult($event)" (deleteMe)="deleteEntity($event)"></app-entity-box>
     </div>
+
+    <!-- XP tally -->
+    <app-xp-total *ngIf="entities.length > 0" [entityList]="entities" class="self-end"></app-xp-total>
   </div>
 </div>
 

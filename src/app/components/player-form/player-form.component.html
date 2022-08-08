@@ -1,18 +1,18 @@
 <form [formGroup]="playerForm" (ngSubmit)="addMonster()" class="w-2/3 mx-auto flex flex-col items-start">
   <div class="w-full flex flex-row justify-between items-center mt-3">
-    <label for="initiative" class="w-5/12">
-      <p class="block text-sm font-medium text-slate-700">Initiative</p>
-      <input id="initiative" type="number" formControlName="initiative" required
-             class="input"
-             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('initiative')}"
-      >
-    </label>
-
     <label for="name" class="w-5/12">
       <p class="block text-sm font-medium text-slate-700">Name</p>
       <input id="name" type="text" formControlName="name" required
              class="input"
              [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('name')}"
+      >
+    </label>
+
+    <label for="initiative" class="w-5/12">
+      <p class="block text-sm font-medium text-slate-700">Initiative</p>
+      <input id="initiative" type="number" formControlName="initiative" required
+             class="input"
+             [ngClass]="{'invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500': invalidControl('initiative')}"
       >
     </label>
   </div>
