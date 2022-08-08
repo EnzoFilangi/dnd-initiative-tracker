@@ -92,7 +92,7 @@ export class AppComponent {
   deleteEntity($event: number) {
     if ($event >= 0){
       this.entities.splice($event, 1);
-      if ($event <= this.initiativePointer){
+      if ($event < this.initiativePointer){
         this.initiativePointer--;
       }
     }

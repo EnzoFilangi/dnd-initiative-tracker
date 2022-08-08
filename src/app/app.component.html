@@ -23,5 +23,5 @@
 </app-modal>
 
 <app-modal #playerModal [title]="'Add a Player'">
-
+  <app-player-form (playerCreated)="addEntity($event)"></app-player-form>
 </app-modal>

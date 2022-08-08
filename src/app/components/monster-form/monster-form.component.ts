@@ -11,7 +11,7 @@ import {EntityTypes} from "../../interfaces/enums";
 })
 export class MonsterFormComponent {
 
-  @Output() monsterCreated= new EventEmitter<Monster>();
+  @Output() monsterCreated = new EventEmitter<Monster>();
 
   monsterForm = this.formBuilder.group({
     initiative: ['', Validators.required],
@@ -21,9 +21,9 @@ export class MonsterFormComponent {
     xp: ['', Validators.compose([Validators.required, Validators.min(0)])],
     sheetURL: ['', Validators.required],
     note: [''],
-  })
+  });
 
-  autoInitiative: boolean = false
+  autoInitiative: boolean = false;
   dexMod: number = 0;
 
   constructor(
@@ -73,5 +73,12 @@ export class MonsterFormComponent {
     } else {
       this.monsterForm.get('initiative')?.enable();
     }
+  }
+
+  resetForm() {
+    this.monsterForm.reset();
+    this.autoInitiative = false;
+    this.dexMod = 0;
+    this.monsterForm.get('initiative')?.enable();
   }
 }
