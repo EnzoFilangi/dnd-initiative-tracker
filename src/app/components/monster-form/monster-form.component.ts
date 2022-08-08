@@ -44,7 +44,7 @@ export class MonsterFormComponent {
       maxHp: Number.parseInt(this.monsterForm.get('maxHp')?.value || "1"),
       xp: Number.parseInt(this.monsterForm.get('xp')?.value || "0"),
       sheetURL: this.monsterForm.get('sheetURL')?.value || '',
-      note: ""
+      note: this.monsterForm.get('note')?.value || ''
     }
     this.monsterCreated.emit(newMonster);
     this.monsterForm.reset();
