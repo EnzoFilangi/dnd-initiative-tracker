@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gradient-to-tr from-violet-600 to-fuchsia-500 p-10">
-  <div class="w-full h-full flex flex-col lg:w-3/5 md:w-4/5 w-full mx-auto flex flex-col">
+  <div class="w-full h-full flex flex-col lg:w-3/5 md:w-4/5 w-full mx-auto flex flex-col mb-20">
     <!-- Heading -->
     <h1 class="text-white font-bold text-6xl mx-auto mb-5">DnD Initiative Tracker</h1>
     <div class="flex flex-row w-full justify-center">
@@ -28,3 +28,21 @@
 <app-modal #playerModal [title]="'Add a Player'">
   <app-player-form (playerCreated)="addEntity($event)"></app-player-form>
 </app-modal>
+
+<div class="fixed right-2 bottom-2 flex flex-row items-center">
+  <button title="Save" class="mr-5" (click)="save()">
+    <fa-icon [icon]="saveIcon" size="2x" class="text-white my-auto"></fa-icon>
+  </button>
+  <button title="Load" class="mr-5" (click)="load()">
+    <fa-stack>
+      <fa-icon [icon]="folderIcon" stackItemSize="2x" class="text-white my-auto"></fa-icon>
+      <fa-icon [icon]="cdIcon" stackItemSize="1x" transform="right-10 down-10" class="text-slate-400 my-auto"></fa-icon>
+    </fa-stack>
+  </button>
+  <button title="Download save file" class="mr-5" (click)="download()">
+    <fa-icon [icon]="downloadIcon" size="2x" class="text-white my-auto"></fa-icon>
+  </button>
+  <button title="Load from file" (click)="upload()">
+    <fa-icon [icon]="uploadIcon" size="2x" class="text-white my-auto"></fa-icon>
+  </button>
+</div>

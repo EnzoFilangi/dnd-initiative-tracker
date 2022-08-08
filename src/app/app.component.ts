@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {Entity} from "./interfaces/entity";
-import {EntityTypes} from "./interfaces/enums";
-import {Monster} from "./interfaces/monster";
-import {Player} from "./interfaces/player";
 import {ModalComponent} from "./components/modal/modal.component";
+
+import {SaveService} from "./services/saveService/save.service";
+
+import { faFloppyDisk, faFolderOpen, faCompactDisc, faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
+
 
 @Component({
   selector: 'app-root',
@@ -13,38 +15,20 @@ import {ModalComponent} from "./components/modal/modal.component";
 export class AppComponent {
   title = 'dnd-initiative-tracker';
 
+  saveIcon = faFloppyDisk;
+  folderIcon = faFolderOpen;
+  cdIcon = faCompactDisc;
+  downloadIcon = faDownload;
+  uploadIcon = faUpload;
+
   initiativePointer = 0;
   anEntityPlayed = false; // Used to detect and prevent infinite looping when trying to find an entity that can play
 
-  entities: Entity[] = [
-    {
-      type: EntityTypes.monster,
-      initiative: 18,
-      name: "Grog",
-      hp: 20,
-      maxHp: 20,
-      xp: 50,
-      race: "Gobelin",
-      sheetURL: "https://www.google.com",
-      note: "Lorem ipsum dolor sit amet"
-    } as Monster,
-    {
-      type: EntityTypes.monster,
-      initiative: 18,
-      name: "Grog",
-      hp: 0,
-      maxHp: 20,
-      xp: 50,
-      race: "Gobelin",
-      sheetURL: "https://www.google.com",
-      note: ""
-    } as Monster,
-    {
-      type: EntityTypes.player,
-      initiative: 16,
-      name: "Kleeck",
-    } as Player
-  ];
+  entities: Entity[] = [];
+
+  constructor(
+    private saveService: SaveService
+  ) {}
 
   /**
    * Increments the value of the initiative pointer so that it indicates whose turn it is.
@@ -128,5 +112,42 @@ export class AppComponent {
    */
   sortEntityList(): void {
     this.entities.sort((a, b) => b.initiative - a.initiative);
+  }
+
+  save() {
+    if (confirm("This will erase the previous save, are you sure ?")){
+      this.saveService.save(this.entities);
+    }
+  }
+
+  load() {
+    if (this.entities.length === 0 || confirm("This will erase the current content, are you sure ?")){
+      this.entities = this.saveService.load();
+      this.initiativePointer = 0;
+    }
+  }
+
+  download() {
+    this.saveService.download(this.entities);
+  }
+
+  /**
+   * Parses the content of the file fetched by this.saveService.upload() and uses it as the entity list
+   */
+  upload() {
+    this.saveService.upload(
+      (reader: FileReader) => {
+        try {
+          if (reader.result){
+            this.entities = JSON.parse(<string>reader.result);
+            this.initiativePointer = 0;
+          } else {
+            alert("The file doesn't contain anything.");
+          }
+        } catch (e) {
+          alert("The file couldn't be loaded or doesn't contain anything.");
+        }
+      }
+    )
   }
 }
