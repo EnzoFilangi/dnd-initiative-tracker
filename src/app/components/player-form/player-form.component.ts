@@ -24,7 +24,7 @@ export class PlayerFormComponent {
   ) { }
 
   /**
-   * Creates a new monster based on the information of the form and triggers an event to pass it up to the parent
+   * Creates a new player based on the information of the form and triggers an event to pass it up to the parent
    */
   addMonster() {
     const newPlayer: Player = {
