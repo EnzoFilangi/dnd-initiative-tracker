@@ -15,4 +15,5 @@ RUN npm run build
 #stage 2
 ### STAGE 2: Run ###
 FROM nginx:1.22.0-alpine
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /usr/src/app/dist/dnd-initiative-tracker /usr/share/nginx/html
