@@ -1,10 +1,18 @@
 #stage 1
-FROM node:latest as node
-WORKDIR /app
+### STAGE 1: Build ###
+FROM node:16.14.2-alpine AS build
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+RUN apk update && apk add --no-cache --virtual .gyp \
+        python3 \
+        make \
+        g++ \
+    && npm ci \
+    && apk del .gyp
 COPY . .
-RUN npm install
-RUN npm run build --prod
+RUN npm run build
 
 #stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist/dnd-initiative-tracker /usr/share/nginx/html
+### STAGE 2: Run ###
+FROM nginx:1.22.0-alpine
+COPY --from=build /usr/src/app/dist/dnd-initiative-tracker /usr/share/nginx/html
