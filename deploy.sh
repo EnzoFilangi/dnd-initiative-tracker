@@ -6,7 +6,7 @@ printf "\n\n"
 echo "###### Deploying changes ######"
 date +'%Y-%m-%d %H:%M:%S'
 
-cd /home/enzo/dnd-initiative-tracket
+cd /home/enzo/dnd-initiative-tracker
 
 echo "------ Git pull ------"
 git reset --hard HEAD # Delete all changes mades locally
