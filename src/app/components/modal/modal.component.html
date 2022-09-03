@@ -1,6 +1,9 @@
 <div #modalContainer class="hidden">
+  <!-- Put a dark filter above the background -->
+  <div class="bg-black opacity-50 fixed top-0 left-0 w-screen h-screen z-50" (click)="closeModal()"></div>
+
   <div #modalBody
-    class="bg-white fixed top-20 md:left-1/4 md:w-1/2 left-0 w-full h-fit z-20 rounded-lg border shadow-2xl
+    class="bg-white fixed top-20 md:left-1/4 md:w-1/2 left-0 w-full h-fit z-50 rounded-lg border shadow-2xl
            duration-300 ease-out outside-screen">
     <div class="border-b flex justify-between items-center p-3">
       <p class="text-xl font-bold">{{title}}</p>
@@ -10,5 +13,4 @@
       <ng-content></ng-content>
     </div>
   </div>
-  <div class="bg-black opacity-50 fixed top-0 left-0 w-screen h-screen z-10" (click)="closeModal()"></div>
 </div>
