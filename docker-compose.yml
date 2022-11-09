@@ -1,6 +1,7 @@
 services:
   web:
     container_name: dnd-initiative-tracker
+    restart: unless-stopped
     build: .
     ports:
       - "127.0.0.1:10001:80"
