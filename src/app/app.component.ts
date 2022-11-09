@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {Entity} from "./interfaces/entity";
 import {ModalComponent} from "./components/modal/modal.component";
 
@@ -86,6 +86,11 @@ export class AppComponent {
   showModal(modal: ModalComponent) {
     modal.showModal();
     this.modalRef = modal;
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  closeModalOnEscapePressed(){
+    this.hideModal();
   }
 
   hideModal(){
