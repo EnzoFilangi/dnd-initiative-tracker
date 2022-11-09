@@ -83,8 +83,18 @@ export class MonsterFormComponent {
     // Make sure to create at least one monster
     if (this.monsterQuantity < 1) this.monsterQuantity = 1;
 
-    // Prepare an initiative value common to use if the user wants a group of monsters
+    // Prepare an initiative value common that will be used if the user wants a group of monsters
     const groupInitiative = this.getInitiativeValue();
+
+    // Generate as many initiative values as there are monsters in case they are independent
+    // Sort them as well so that the first one to play is the lowest number
+    const initiatives = [];
+    if (!this.isGroup){ // Skip this step if this is a group to avoid N computations
+      for (let i = 0; i < this.monsterQuantity; i++){
+        initiatives.push(this.getInitiativeValue());
+      }
+      initiatives.sort((a, b) => b - a); // Descending sort
+    }
 
     // Emit as many new monsters with the desired values as the user wants
     for (let i = 0; i < this.monsterQuantity; i++){
@@ -95,7 +105,7 @@ export class MonsterFormComponent {
       if (this.isGroup){
         this.emitMonster(groupInitiative, nameSuffix);
       } else {
-        this.emitMonster(this.getInitiativeValue(), nameSuffix);
+        this.emitMonster(initiatives[i], nameSuffix);
       }
     }
 
