@@ -44,7 +44,7 @@ export class MonsterFormComponent {
     const newMonster: Monster = {
       type: EntityTypes.monster,
       initiative: initiative,
-      name: (this.monsterForm.get('name')?.value || '') + appendName,
+      name: (this.monsterForm.get('name')?.value || '') + ' ' + appendName,
       race: this.monsterForm.get('race')?.value || '',
       hp: Number.parseInt(this.monsterForm.get('maxHp')?.value || "1"),
       maxHp: Number.parseInt(this.monsterForm.get('maxHp')?.value || "1"),
