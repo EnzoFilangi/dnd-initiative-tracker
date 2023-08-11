@@ -5,6 +5,7 @@ import {ModalComponent} from "./components/modal/modal.component";
 import {SaveService} from "./services/saveService/save.service";
 
 import { faFloppyDisk, faFolderOpen, faCompactDisc, faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
+import {Subject} from "rxjs";
 
 
 @Component({
@@ -26,29 +27,40 @@ export class AppComponent {
 
   entities: Entity[] = [];
 
+  nextTurnSubject: Subject<void> = new Subject();
+  resetTurnCounterSubject: Subject<void> = new Subject();
+
   constructor(
     private saveService: SaveService
   ) {}
 
   /**
+   * Sets the initiative pointer to the top of the list
+   *
+   * Has a special protection to avoid infinite looping if no one can play.
+   */
+  goToTopOfRound() {
+    // To avoid an infinite loop in case no entity can play, we set the pointer to 0 only if at least one entity has played
+    // If no entity played, we set the pointer to -1. This way, no entity will be highlighted and so the program won't try
+    // to find an entity that can play until the user presses the next turn button
+    if (this.anEntityPlayed) {
+      this.initiativePointer = 0
+    } else {
+      this.initiativePointer = -1;
+    }
+  }
+
+  /**
    * Increments the value of the initiative pointer so that it indicates whose turn it is.
    *
    * Loops back to 0 when it reaches the size of the list.
-   *
-   * Has a special protection to avoid infinite looping if no one can play.
    */
   incrementInitiativePointer(): void {
     this.initiativePointer++;
     if (this.initiativePointer >= this.entities.length) {
-      // To avoid an infinite loop in case no entity can play, we set the pointer to 0 only if at least one entity has played
-      // If no entity played, we set the pointer to -1. This way, no entity will be highlighted and so the program won't try
-      // to find an entity that can play until the user presses the next turn button
-      if (this.anEntityPlayed) {
-        this.initiativePointer = 0
-      } else {
-        this.initiativePointer = -1;
-      }
+      this.goToTopOfRound();
       this.anEntityPlayed = false;
+      this.nextTurnSubject.next();
     }
   }
 

@@ -12,6 +12,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { MonsterFormComponent } from './components/monster-form/monster-form.component';
 import { PlayerFormComponent } from './components/player-form/player-form.component';
 import { XpTotalComponent } from './components/xp-total/xp-total.component';
+import { RoundCounterComponent } from './components/round-counter/round-counter.component';
+import { RoundControlsComponent } from './components/round-controls/round-controls.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { XpTotalComponent } from './components/xp-total/xp-total.component';
     ModalComponent,
     MonsterFormComponent,
     PlayerFormComponent,
-    XpTotalComponent
+    XpTotalComponent,
+    RoundCounterComponent,
+    RoundControlsComponent
   ],
   imports: [
     BrowserModule,
